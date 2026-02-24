@@ -1,4 +1,3 @@
-# Dockerfile for Backend Service
 FROM python:3.12-slim
 
 WORKDIR /app
@@ -6,7 +5,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY src/ /app/
 
 EXPOSE 5001
 

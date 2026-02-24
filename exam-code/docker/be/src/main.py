@@ -20,11 +20,13 @@ DB_CONFIG = {
 # API to fetch crypto prices
 COIN_API_URL = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,xrp&vs_currencies=usd"
 
+
 def get_crypto_prices():
     response = requests.get(COIN_API_URL)
     if response.status_code == 200:
         return response.json()
     return {}
+
 
 def initialize_database():
     print("Initializing database...")
@@ -42,7 +44,7 @@ def initialize_database():
             cursor.execute("CREATE DATABASE IF NOT EXISTS crypto_db")
             cursor.close()
             conn.close()
-            
+
             conn = mysql.connector.connect(**DB_CONFIG)
             cursor = conn.cursor()
             create_table_query = """
@@ -68,6 +70,7 @@ def initialize_database():
                 print("Database connection failed. Exiting.")
                 exit(1)
 
+
 def save_to_db(coin_name, price):
     try:
         conn = mysql.connector.connect(**DB_CONFIG)
@@ -85,6 +88,7 @@ def save_to_db(coin_name, price):
         print(f"Unexpected error: {e}")
     return False
 
+
 @app.route('/fetch_price', methods=['GET'])
 def fetch_price():
     prices = get_crypto_prices()
@@ -98,6 +102,7 @@ def fetch_price():
         return jsonify(results)
     print("Error: Failed to fetch prices from API")
     return jsonify({"error": "Failed to fetch prices"}), 500
+
 
 if __name__ == '__main__':
     initialize_database()

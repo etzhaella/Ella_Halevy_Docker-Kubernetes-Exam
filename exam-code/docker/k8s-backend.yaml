@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: be-app:latest
+          image: devopshift-backend:latest
           ports:
             - containerPort: 5001
           env:

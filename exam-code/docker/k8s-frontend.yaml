@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: fe-app:latest
+          image: devopshift-frontend:latest
           ports:
             - containerPort: 5002
           env:

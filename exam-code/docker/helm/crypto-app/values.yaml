@@ -1,0 +1,40 @@
+frontend:
+  replicaCount: 2
+  image:
+    repository: devopshift-frontend
+    tag: "latest"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 5002
+  env:
+    backendUrl: "http://backend-service:5001"
+
+backend:
+  replicaCount: 2
+  image:
+    repository: devopshift-backend
+    tag: "latest"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 5001
+  env:
+    mysqlHost: "mysqldb"
+    mysqlUser: "root"
+    mysqlPassword: "123456"
+
+mysql:
+  replicaCount: 1
+  image:
+    repository: mysql
+    tag: "5.7"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 3306
+  env:
+    rootPassword: "123456"
+    database: "crypto_db"
+    user: ""
+    password: ""

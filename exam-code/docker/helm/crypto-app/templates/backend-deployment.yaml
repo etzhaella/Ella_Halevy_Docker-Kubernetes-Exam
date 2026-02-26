@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          ports:
+            - containerPort: 5001
+          env:
+            - name: MYSQL_HOST
+              value: "{{ .Values.backend.env.mysqlHost }}"
+            - name: MYSQL_USER
+              value: "{{ .Values.backend.env.mysqlUser }}"
+            - name: MYSQL_PASSWORD
+              value: "{{ .Values.backend.env.mysqlPassword }}"

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: crypto-app
+description: Helm chart for frontend, backend and MySQL for the crypto exam app
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

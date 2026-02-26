@@ -1,0 +1,23 @@
+Thank you for installing the crypto-app chart.
+
+To verify that everything is running:
+
+1. Check pods:
+
+   kubectl get pods
+
+2. Check services:
+
+   kubectl get svc
+
+To access the frontend from your browser (ClusterIP service):
+
+1. Port-forward the frontend service:
+
+   kubectl port-forward svc/frontend-service 5002:5002
+
+2. Open the browser at:
+
+   http://localhost:5002
+
+The frontend will call the backend at "backend-service:5001", and the backend will use MySQL at "mysqldb:3306" with the credentials from values.yaml.
